@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Glass Price Calculator</title>
+  <link rel="stylesheet" href="./scss/css/main.css"/>
+  <!-- <link rel="stylesheet" href="./fontawesome/css/font-awesome.min.css"/> -->
+</head>
+<body>
+  <div class="heading">
+    <h1>Glass Price Calculator</h1>
+    <button class="add"><span>+</span><span>Add New</span></button>
+  </div>
+  <form>
+    <!-- WIDTH -->
+    <fieldset class="width">
+      <legend><label for="input__width">Width</label></legend>
+      <input type="number" value="600" id="input__width"/>
+    </fieldset>
+    <div class="error__width error">A valid value, please!</div>
+    <!-- HEIGHT -->
+    <fieldset class="height">
+      <legend><label for="input__height">Height</label></legend>
+      <input type="number" value="900" id="input__height"/>
+    </fieldset>
+    <div class="error__height error">A valid value, please!</div>
+    <!-- QUANTITY -->
+    <fieldset class="qty">
+      <legend><label for="input__qty">Quantity</label></legend>
+      <input type="number" value="1" id="input__qty"/>
+    </fieldset>
+    <div class="error__qty error">A valid value, please!</div>
+    <!-- PRICE -->
+    <fieldset class="price">
+      <legend><label for="input__price">Full Sheet price</label></legend>
+      <input type="number" id="input__price" value="90000"/>
+    </fieldset>
+    <div class="price__notice error">Default is ₦90,000</div>
+  </form>
+  <!-- ANSWER -->
+  <div class="answer__section">
+    <p class="answer">Glass Price: </p>
+    <button class="reset">RESET</button>
+    <button class="tabulate"></i>TABULATE</button>
+    <button class="compute">COMPUTE</button>
+  </div>
+  <div class="table">
+    <div class="table__header">
+      <p class="row">
+        <span class="sn col-1">s/n</span>
+        <span class="size col-2">size</span>
+        <span class="quantity col-3">qty</span>
+        <span class="per col-4">per</span>
+        <span class="total col-5">sum</span>
+      </p>
+    </div>
+    <div class="table__body">
+      <p class="row">
+        <span class="sn col-1">1</span>
+        <span class="size col-2">600 ✕ 900</span>
+        <span class="quantity col-3">1</span>
+        <span class="per col-4">@₦7,000</span>
+        <span class="total col-5">21,000</span>
+        <span class="remove col-6">✕</span>
+      </p>
+      <template id="row">
+        <p class="row">
+          <span class="sn col-1">2</span>
+          <span class="size col-2">600 ✕ 900</span>
+          <span class="quantity col-3">1</span>
+          <span class="per col-4">@₦7,000</span>
+          <span class="total col-5">21,000</span>
+          <span class="remove col-6">✕</span>
+        </p>
+      </template>
+    </div>
+    <div class="table__footer">
+      <p class="row">
+        <span class="total col-1 col-2 col-2 col-4">Total</span>
+        <span class="total-price">32,000</span>
+      </p>
+    </div>
+  </div>
+
+  <button class="clear">Clear Table</button>
+
+  <div class="modal">
+    <div class="modal__overlay" id="close-modal">
+    </div>
+    <div class="modal__content">
+      <div class="modal__content__header">
+        <div class="modal__content__header__text">Glass Size already exists</div>
+        <button class="modal__content__header__checkbox" id="close-modal">✕</button>
+      </div>
+      <p>This exact glass size already exists. Do you want to modify or create a new one?</p>
+      <div class="modal__content__answer">
+        <button class="modal__content__answer__modify" id="modify">Modify</button>
+        <button class="modal__content__answer__create" id="create">Create</button>
+    </div>
+    </div>
+  </div>
+  
+  <script src="./main.js" defer></script>
+</body>
+</html>

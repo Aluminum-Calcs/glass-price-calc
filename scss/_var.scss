@@ -1,0 +1,8 @@
+
+@mixin df($j:normal,$a:normal, $fl:row, $g:0){
+  display: flex;
+  justify-content: $j;
+  align-items: $a;
+  flex-flow: $fl;
+  gap: $g;
+}

@@ -1,0 +1,132 @@
+
+
+* {
+  font-family: Monospace;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+fieldset {
+  border: none;
+  display: flex;
+  justify-content: normal;
+  position: relative;
+  padding: 0;
+  margin: 25px 0 10px 0;
+}
+fieldset legend {
+  position: absolute;
+  padding: 0 10px;
+  left: 15px;
+  top: 0;
+  transform: translateY(-50%);
+  background: #fff;
+}
+
+fieldset:focus-within legend {
+  color: green;
+}
+
+fieldset input {
+  outline: none;
+  display: flex;
+  font-weight: 700;
+  font-size: 20px;
+  padding: 20px 20px 10px 20px;
+  width: 100%;
+  border: 1px solid;
+}
+fieldset input:focus {
+  border-color: green;
+}
+
+fieldset::after {
+  content: "mm";
+  font-weight: 700;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  height: inherit;
+  width: 50px;
+  background: rgba(#ccc,.5);
+  border: 1px solid;
+  border-left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+fieldset:last-of-type::after {
+  content: '₦';
+}
+fieldset:focus-within::after {
+  color: green;
+  border-color: green;
+}
+
+.reset {
+  width: 100%;
+  border: 1px solid;
+  padding: 10px 20px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 20px;
+}
+.reset:hover {
+  background: #ccc;
+}
+
+.error {
+  font-size: 12px;
+  display: flex;
+  justify-content: normal;
+  align-items: center;
+  flex-direction: row;
+  gap: 5px;
+}
+.error::before {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  content: "!";
+  border: 1px solid;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  font-size: 10px;
+}
+.error__width, .error__height {
+  display: none;
+}
+
+fieldset.wrong input {
+  border-color: crimson;
+}
+fieldset.wrong input:focus {
+  border-color: crimson;
+}
+fieldset.wrong legend {
+  color: crimson;
+}
+
+fieldset.wrong::after {
+  color: crimson;
+  border-color: crimson;
+}
+fieldset.wrong + .error {
+  color: crimson;
+  display: flex
+  ;
+  justify-content: normal;
+  align-items: center;
+  flex-direction: row;
+  gap: 5px;
+}

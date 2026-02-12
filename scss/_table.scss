@@ -1,0 +1,60 @@
+@use './var' as *;
+
+.table {
+  margin-top: 30px;
+  @include df(normal, normal,  column, 10px);
+  >*{
+    border: 2px solid;
+  }
+  &__header, &__body, &__footer {
+    grid-column: 1/-1;
+    background: #121212;
+    @include df(normal, normal, column, 1px);
+    .row {
+      margin: 0;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 40px 1fr 40px 1fr 1fr 40px;
+      gap: 1px;
+      >span {
+        padding: 10px;
+        background: #fff;
+      }
+    }
+  }
+  &__header {
+    text-transform: capitalize;
+    font-weight: 600;
+  }
+  &__footer {
+    font-weight: 700;
+    .row {
+      @for $i from 1 through 4 {
+        .col-#{$i} {
+          grid-column: 1 / #{$i + 1};
+        }
+      }
+    }
+  }
+  &__body {
+    .row {
+      >span:last-of-type {
+        cursor: pointer;
+        font-weight: 600;
+        transition: all .3s;
+        @include df(center, center);
+        &:hover {
+          background: #b8b6b6;
+          color: #121212;
+        }
+      }
+    }
+  }
+  &__header,&__footer {
+    .row {
+      >span:last-of-type {
+        grid-column: 5/7;
+      }
+    }
+  }
+}
