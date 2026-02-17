@@ -20,7 +20,13 @@ let reset = document.querySelector('.reset');
 let compute = document.querySelector('.compute');
 let tabulate = document.querySelector('.tabulate');
 
-compute.addEventListener('click', () => {
+const priceFormatter = new Intl.NumberFormat('en-NG', {
+  style: 'currency',
+  currency: 'NGN'
+});
+
+compute.addEventListener('click', (e) => {
+  e.preventDefault();
   calculate();
 })
 setInterval(()=>{
@@ -37,7 +43,7 @@ let g__price;
 
 let sizes = JSON.parse(localStorage.getItem('sizes')) || [];
 
-function calculate() {
+async function calculate() {
   let w_sc = W / width.value;
   let h_sc = H / height.value;
   
@@ -67,25 +73,22 @@ function calculate() {
     }
   })
   if (inserted) {
-    let modal__response = prompt__modal();
-    console.log(modal__response)
+    //The function pauses here
+    let modal__response = await prompt__modal();
     if (modal__response == 'modify') {
-      console.log(modal__response)
       sizes[inserted__index] = obj;
+      g__no--;
     } else if (modal__response == 'create') {
-      console.log('sizes has new input')
       sizes.push(obj);
     }
   } else {
-    console.log('sizes has new input')
     sizes.push(obj);
   }
 
-  console.log(sizes);
   localStorage.setItem('sizes', JSON.stringify(sizes))
   localStorage.setItem('g__no', JSON.stringify(g__no))
 
-  answer.innerHTML = 'Glass Price: <b>₦' + g__price + '</b>'
+  answer.innerHTML = `Glass Price: <b>${priceFormatter.format(g__price)}</b>`;
 }
 
 function error() {
@@ -147,53 +150,55 @@ reset.addEventListener('click', ()=>{
   glassPrice.value = 90000;
 })
 
-tabulate.addEventListener('click', () => {
+tabulate.onclick = () => {
   render__rows();
-})
+}
 
 function render__rows() {
-  let table = document.querySelector('.table');
   let table__body = document.querySelector('.table__body');
-  let row__template = document.querySelector('#row');
-  let row__template__content = row__template.content;
+  let table__text = ``;
 
-  sizes.forEach(el => {
-    let clone = document.importNode(row__template__content, true);
-    clone.querySelector('.sn').innerHTML = el.id;
-    clone.querySelector('.size').innerHTML = el.size;
-    clone.querySelector('.quantity').innerHTML = el.qty;
-    clone.querySelector('.per').innerHTML = `@₦${el.per}`;
-    clone.querySelector('.total').innerHTML = el.price;
+  sizes.forEach((el, index) => {
 
-    table__body.appendChild(clone);
+    let row = `
+      <p class="row" data-id="${el.id}">
+        <span class="sn col-1">${index + 1}</span>
+        <span class="size col-2">${el.size}</span>
+        <span class="quantity col-3">${el.qty}</span>
+        <span class="per col-4">@${priceFormatter.format(el.per)}</span>
+        <span class="total col-5">${priceFormatter.format(el.price)}</span>
+        <span class="remove col-6">✕</span>
+      </p>
+      `;
+      
+    table__text += row;
   });
-  
+  table__body.innerHTML = table__text;
 }
 
 function prompt__modal() {
-  let modal = document.querySelector('.modal');
-  modal.classList.add('active')
-  let modifybtn = modal.querySelector('#modify')
-  let createbtn = modal.querySelector('#create')
-  let closeModal = modal.querySelectorAll('#close-modal');
-  let reply = '';
-
+  
   //Wait for users to fire any of the three events below before terminating the function.
-  modifybtn.addEventListener('click', () => {
-    modal.classList.remove('active');
-    reply = 'modify';
-  })
-  createbtn.addEventListener('click', () => {
-    modal.classList.remove('active');
-    reply = 'create';
-  })
-  closeModal.forEach(el => {
-    el.addEventListener('click', () => {
-      modal.classList.remove('active');
-    })
-  })
+  return new Promise((resolve) => {
+    let modal = document.querySelector('.modal');
+    modal.classList.add('active')
+    let modifybtn = modal.querySelector('#modify')
+    let createbtn = modal.querySelector('#create')
+    let closeModal = modal.querySelectorAll('#close-modal');
 
-  console.log(reply)
-  return reply;
+    modifybtn.onclick = () => {
+      modal.classList.remove('active');
+      resolve('modify');
+    }
+    createbtn.onclick = () => {
+      modal.classList.remove('active');
+      resolve('create');
+    }
+
+    closeModal.forEach(el => el.onclick = () => {
+      modal.classList.remove('active');
+      resolve('modify');
+    });
+  });
 }
 
