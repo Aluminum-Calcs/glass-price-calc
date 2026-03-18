@@ -1,0 +1,58 @@
+@use '../util/' as *;
+
+.list {
+  margin-top: 20px;
+  .table {
+    border-collapse: collapse;
+    width: 100%;
+    tr {
+      border-bottom: 1px solid var(--dark-cream);
+    }
+    td,th {
+      text-align: left;
+      padding: 5px;
+    }
+    thead {
+      background: var(--medium);
+      th {
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+
+    }
+    tbody {
+      tr {
+        &:nth-of-type(2n) {
+          background: var(--medium);
+        }
+        td:first-of-type {
+          font-weight: bold;
+          @include df(left, center);
+        }
+        td:nth-of-type(4) {
+          font-weight: bold;
+        }
+        td:last-of-type {
+          font-weight: bold;
+          border: 2px solid;
+          border-radius: 50%;
+          width: 25px;
+          height: 25px;
+          margin: 5px;
+          transition: all .3s;
+          cursor: pointer;
+          @include df(center, center);
+          &:hover {
+            background: var(--cream);
+          }
+        }
+      }
+    }
+    tfoot {
+      font-weight: 700;
+    }
+    &.empty {
+      display: none;
+    }
+  }
+}

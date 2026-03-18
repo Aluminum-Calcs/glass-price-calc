@@ -1,0 +1,23 @@
+@use './vars' as *;
+
+@mixin df($j:normal,$a:normal, $fl:row, $g:0){
+  display: flex;
+  justify-content: $j;
+  align-items: $a;
+  flex-flow: $fl;
+  gap: $g;
+}
+
+@mixin btn {
+  border: 2px solid;
+  white-space: nowrap;
+  padding: 5px 10px;
+  text-align: center;
+  font: inherit;
+  font-weight: 700;
+  font-size: inherit;
+  @include df(center, center, row, 5px);
+  &:hover {
+    background: #ccc;
+  }
+}

@@ -1,0 +1,17 @@
+@use './vars' as *;
+@use './mixins' as *;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Monospace;
+  padding: 20px;
+  input, button {
+    font-family: Monospace;
+  }
+}
+.heading {
+  @include df(space-between, center, row wrap, 10px);
+}

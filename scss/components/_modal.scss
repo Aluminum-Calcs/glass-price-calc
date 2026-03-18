@@ -1,0 +1,53 @@
+@use '../util/' as *;
+
+
+.modal {
+  padding: 20px;
+  position: fixed;
+  z-index: 12;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: none;
+  &.active {
+    @include df(center, center);
+  }
+  &__overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(#121212,.5);
+  }
+  &__content {
+    position: relative;
+    background: #fff;
+    border: 2px solid;
+    padding: 20px;
+    @include df(normal, normal, column, 10px);
+    &__header {
+      @include df(space-between, center, row, 10px);
+      &__text {
+        font-weight: 700;
+        font-size: 110%;
+      }
+      &__checkbox {
+        @include btn;
+        & {
+          height: 30px;
+          width: 30px;
+          @include df(center, center);
+        }
+      }
+    }
+    &__answer {
+      @include df(space-between, center, row, 10px);
+      >* {
+        flex: 1;
+        @include btn;
+      }
+    }
+  }
+}

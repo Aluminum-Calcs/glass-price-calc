@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Glass Price Calculator</title>
+  <link rel="stylesheet" href="./scss/css/main.css"/>
+  <!-- <link rel="stylesheet" href="./fontawesome/css/font-awesome.min.css"/> -->
+</head>
+<body>
+  <header class="heading">
+    <h1>Glass Price Calculator</h1>
+    <!-- <button class="add"><span>+</span><span>Add New</span></button> -->
+  </header>
+  <form>
+    <!-- WIDTH -->
+    <fieldset class="width">
+      <legend><label for="input__width">Width</label></legend>
+      <input type="number" value="600" id="input__width"/>
+    </fieldset>
+    <div class="error__width error">A valid value, please!</div>
+    <!-- HEIGHT -->
+    <fieldset class="height">
+      <legend><label for="input__height">Height</label></legend>
+      <input type="number" value="900" id="input__height"/>
+    </fieldset>
+    <div class="error__height error">A valid value, please!</div>
+    <!-- QUANTITY -->
+    <fieldset class="qty">
+      <legend><label for="input__qty">Quantity</label></legend>
+      <input type="number" value="1" id="input__qty"/>
+    </fieldset>
+    <div class="error__qty error">A valid value, please!</div>
+    <!-- PRICE -->
+    <fieldset class="price">
+      <legend><label for="input__price">Full Sheet price</label></legend>
+      <input type="number" id="input__price" value="90000"/>
+    </fieldset>
+    <div class="price__notice error">Default is ₦90,000</div>
+  </form>
+
+  <!-- ANSWER -->
+  <section class="answer__section">
+    <p class="answer">Glass Price: </p>
+    <div class="answer__section__btns">
+      <button class="reset" title="Resets the input fields">RESET</button>
+      <button class="clear" title="Deletes all tabulated prices">Clear Table</button>
+      <button class="tabulate"></i title="Tabulates computed input">TABULATE</button>
+      <button class="compute" title="Computes Price">COMPUTE</button>
+    </div>
+  </section>
+
+  <section class="list">
+    <table class="table empty">
+      <thead class="table__header">
+        <tr>
+          <th>s/n</th>
+          <th>size</th>
+          <th>per</th>
+          <th colspan="2">sum</th>
+        </tr>
+      </thead>
+      <tbody class="table__body">
+        <tr class="row">
+          <td>1</td>
+          <td>600 ✕ 900</td>
+          <td>@₦7,000(1)</td>
+          <td>21,000</td>
+          <td>✕</td>
+        </tr>
+        <tr class="row">
+          <td>2</td>
+          <td>1650 ✕ 1070</td>
+          <td>@₦45,000(3)</td>
+          <td>135,000</td>
+          <td>✕</td>
+        </tr>
+      </tbody>
+      <tfoot class="table__footer">
+        <tr class="row">
+          <td colspan="3">Total</td>
+          <td colspan="2" class="total">32,000</td>
+        </tr>
+      </tfoot>
+    </table>
+  </section>
+
+  <section class="modal">
+    <div class="modal__overlay" id="close-modal">
+    </div>
+    <div class="modal__content">
+      <div class="modal__content__header">
+        <div class="modal__content__header__text">Glass Size already exists</div>
+        <button class="modal__content__header__checkbox" id="close-modal">✕</button>
+      </div>
+      <p>This exact glass size already exists. Do you want to modify or create a new one?</p>
+      <div class="modal__content__answer">
+        <button class="modal__content__answer__modify" id="modify">Modify</button>
+        <button class="modal__content__answer__create" id="create">Create</button>
+    </div>
+    </div>
+  </section>
+
+  <!-- TEMPLATES -->
+  <template id="row">
+    <tr class="row">
+      <td class="sn">1</td>
+      <td class="size">600 ✕ 900</td>
+      <td class="per">@₦7,000(1)</td>
+      <td class="price">21,000</td>
+      <td class="close-btn">✕</td>
+    </tr>
+  </template>
+  
+  <script src="./main.js" defer></script>
+</body>
+</html>

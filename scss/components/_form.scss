@@ -1,0 +1,126 @@
+@use '../util' as *;
+
+form {
+  @include df(normal, normal, column);
+}
+
+fieldset {
+  border: none;
+  position: relative;
+  padding: 0;
+  margin: 25px 0 10px 0;
+  @include df(normal);
+  legend {
+    position: absolute;
+    padding: 0 10px;
+    left: 15px;
+    top: 0;
+    transform: translateY(-50%);
+    background: #fff;
+  }
+  &:focus-within legend {
+    color: green;
+  }
+  & input {
+    outline: none;
+    display: flex;
+    font-weight: 700;
+    font-size: 20px;
+    padding: 20px 20px 10px 20px;
+    width: 100%;
+    border: 1px solid;
+    @include df;
+    &:focus {
+      border-color: green;
+    }
+  }
+  
+  &::after {
+    content: "mm";
+    font-weight: 700;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    height: inherit;
+    width: 50px;
+    background: rgba(#ccc,.5);
+    border: 1px solid;
+    border-left: 0;
+    @include df(center, center);
+  }
+  &:last-of-type::after {
+    content: '₦';
+  }
+  &:focus-within::after {
+    color: green;
+    border-color: green;
+    background: rgba(green,.1);
+  }
+}
+
+
+.error {
+  font-size: 12px;
+  @include df(normal, center, row, 5px);
+  &::before {
+    content: "!";
+    border: 1px solid;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    font-size: 10px;
+    @include df(center, center);
+  }
+  &__width, &__height, &__qty {
+    display: none;
+  }
+}
+
+fieldset.wrong {
+  & input {
+    border-color: crimson;
+    &:focus {
+      border-color: crimson;
+    }
+  }
+  & legend {
+    color: crimson;
+  }
+  
+  &::after {
+    color: crimson;
+    border-color: crimson;
+    background: rgba(crimson,.1);
+  }
+  & + .error {
+    color: crimson;
+    @include df(normal, center, row, 5px);
+  }
+}
+
+.answer__section {
+  @include df(space-between, center, row wrap, 10px);
+  .answer {
+    font-size: 2rem;
+    width: 100%;
+  }
+  &__btns {
+    @include df(normal, center, row wrap, 10px);
+    .reset , .compute,.tabulate,.clear {
+      flex: 1;
+      @include btn;
+    }
+  }
+  
+}
+.add {
+  @include btn;
+  span:first-of-type {
+    border: 1px solid;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    @include df(center, center);
+  }
+}
